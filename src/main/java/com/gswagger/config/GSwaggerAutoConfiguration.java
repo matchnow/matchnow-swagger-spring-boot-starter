@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -87,5 +88,18 @@ public class GSwaggerAutoConfiguration {
     @ConditionalOnProperty(GSWAGGER_CORS_ENABLED)
     public OncePerRequestFilter gSwaggerCorsFilter() {
         return new GSwaggerCorsFilter();
+    }
+
+    @Bean
+    @ConditionalOnProperty(GSWAGGER_SECURITY_CONFIG_ENABLED)
+    public WebSecurityCustomizer webSecurityCustomizer(
+            @Value(Constants.API_DOCS_URL) String apiDocsUrl,
+            @Value(Constants.SWAGGER_UI_PATH) String swaggerUiPath
+    ) {
+        return (web) -> web.ignoring()
+                .antMatchers(apiDocsUrl)
+                .antMatchers(apiDocsUrl + "/**")
+                .antMatchers(swaggerUiPath)
+                .antMatchers(swaggerUiPath + "/**");
     }
 }
