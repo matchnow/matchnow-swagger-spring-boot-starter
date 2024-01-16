@@ -10,14 +10,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GSwaggerDisplayServers {
-    private List<SwaggerDisplayServer> external;
-    private List<SwaggerDisplayServer> internal;
+public class GSwaggerServers {
+    private List<GSwaggerServer> external;
+    private List<GSwaggerServer> internal;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class SwaggerDisplayServer {
+    public static class GSwaggerServer {
         private String name;
         private String url;
     }

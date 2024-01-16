@@ -1,9 +1,9 @@
 package com.gswagger.utils;
 
-import com.gswagger.properties.GSwaggerDisplayServers;
 import com.gswagger.properties.GSwaggerGlobalHeaders;
 import com.gswagger.properties.GSwaggerGroup;
 import com.gswagger.properties.GSwaggerProperties;
+import com.gswagger.properties.GSwaggerServers;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.Paths;
@@ -52,7 +52,7 @@ public class DefaultGroupGenerator implements GSwaggerGroupGenerator {
     }
 
 
-    private List<Server> createServers(List<GSwaggerDisplayServers.SwaggerDisplayServer> servers) {
+    private List<Server> createServers(List<GSwaggerServers.GSwaggerServer> servers) {
         return servers.stream().map(server -> new Server().description(server.getName()).url(server.getUrl())).collect(Collectors.toList());
     }
 
@@ -83,8 +83,8 @@ public class DefaultGroupGenerator implements GSwaggerGroupGenerator {
                             .version(group.getVersion()))
                     .servers(createServers(
                             group.isInternal() ?
-                                    properties.getDisplayServers().getInternal() :
-                                    properties.getDisplayServers().getExternal()));
+                                    properties.getServers().getInternal() :
+                                    properties.getServers().getExternal()));
 
 
             List<GSwaggerGlobalHeaders.GSwaggerHeader> headers = group.isInternal() ?

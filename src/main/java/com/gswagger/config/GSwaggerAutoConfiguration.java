@@ -82,7 +82,9 @@ public class GSwaggerAutoConfiguration {
         return groupGenerator.generateGroup(properties.getGroups().get(0));
     }
 
-    // @see https://stackoverflow.com/questions/69091165/onceperrequestfilter-is-not-called-when-user-tries-to-log-in-with-wrong-credenti
+    /**
+     * NOTE: <b>모든 요청</b>에 CORS 를 허용한다.
+     */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     @ConditionalOnProperty(GSWAGGER_CORS_ENABLED)
@@ -90,6 +92,9 @@ public class GSwaggerAutoConfiguration {
         return new GSwaggerCorsFilter();
     }
 
+    /**
+     * SWAGGER 관련 모든 요청을 허용한다.
+     */
     @Bean
     @ConditionalOnProperty(GSWAGGER_SECURITY_CONFIG_ENABLED)
     public WebSecurityCustomizer webSecurityCustomizer(
