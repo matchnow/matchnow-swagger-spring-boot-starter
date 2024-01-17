@@ -63,8 +63,8 @@ public class GSwaggerAutoConfiguration {
     }
 
     @Bean
-    public GSwaggerRedirectPathReplacer defaultRedirectPathReplacer() {
-        return new DefaultRedirectPathReplacer();
+    public GSwaggerRedirectPathReplacer defaultRedirectPathReplacer(GSwaggerProperties properties) {
+        return new DefaultRedirectPathReplacer(properties);
     }
 
     /**

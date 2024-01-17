@@ -12,4 +12,5 @@ public class GSwaggerProperties {
     private List<GSwaggerGroup> groups;
     private GSwaggerGlobalHeaders globalHeaders;
     private GSwaggerServers servers;
+    private GSwaggerRedirectProperties redirectRules;
 }
