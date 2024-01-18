@@ -1,5 +1,5 @@
 package com.gswagger;
 
-public enum GSwaggerPathType {
+public enum MatchnowSwaggerPathType {
     NONE, EXTERNAL, INTERNAL
 }

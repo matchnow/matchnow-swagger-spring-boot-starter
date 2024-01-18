@@ -10,15 +10,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GSwaggerServers {
-    private List<GSwaggerServer> external;
-    private List<GSwaggerServer> internal;
+public class MatchnowSwaggerRedirectProperties {
+    private List<MatchnowSwaggerRedirectRule> external;
+    private List<MatchnowSwaggerRedirectRule> internal;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class GSwaggerServer {
-        private String name;
-        private String url;
+    public static class MatchnowSwaggerRedirectRule {
+        private String from;
+        private String to;
     }
 }

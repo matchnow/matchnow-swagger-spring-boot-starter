@@ -1,7 +1,7 @@
 package com.gswagger.utils;
 
-import com.gswagger.properties.GSwaggerProperties;
-import com.gswagger.properties.GSwaggerRedirectProperties;
+import com.gswagger.properties.MatchnowSwaggerProperties;
+import com.gswagger.properties.MatchnowSwaggerRedirectProperties;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -11,20 +11,20 @@ import java.util.Objects;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 @RequiredArgsConstructor
-public class DefaultRedirectPathReplacer implements GSwaggerRedirectPathReplacer {
-    private final GSwaggerProperties properties;
+public class DefaultRedirectPathReplacer implements MatchnowSwaggerRedirectPathReplacer {
+    private final MatchnowSwaggerProperties properties;
 
     @Override
     public String replace(String path) {
-        GSwaggerRedirectProperties redirectRules = properties.getRedirectRules();
+        MatchnowSwaggerRedirectProperties redirectRules = properties.getRedirectRules();
         if (Objects.nonNull(redirectRules)) {
             path = replaceByRules(path, redirectRules);
         }
         return path;
     }
 
-    private static String replaceByRules(String path, GSwaggerRedirectProperties redirectRules) {
-        List<GSwaggerRedirectProperties.GSwaggerRedirectRule> rules = new ArrayList<>();
+    private static String replaceByRules(String path, MatchnowSwaggerRedirectProperties redirectRules) {
+        List<MatchnowSwaggerRedirectProperties.MatchnowSwaggerRedirectRule> rules = new ArrayList<>();
         if (!isEmpty(redirectRules.getExternal())) {
             rules.addAll(redirectRules.getExternal());
         }
@@ -33,7 +33,7 @@ public class DefaultRedirectPathReplacer implements GSwaggerRedirectPathReplacer
             rules.addAll(redirectRules.getInternal());
         }
 
-        for (GSwaggerRedirectProperties.GSwaggerRedirectRule rule : rules) {
+        for (MatchnowSwaggerRedirectProperties.MatchnowSwaggerRedirectRule rule : rules) {
             path = path.replace(rule.getFrom(), rule.getTo());
         }
         return path;

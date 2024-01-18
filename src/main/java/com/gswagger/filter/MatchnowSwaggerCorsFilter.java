@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static org.springframework.http.HttpHeaders.*;
 
-public class GSwaggerCorsFilter extends OncePerRequestFilter {
+public class MatchnowSwaggerCorsFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

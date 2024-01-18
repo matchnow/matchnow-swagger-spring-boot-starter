@@ -10,6 +10,6 @@ package com.gswagger.utils;
  * <p>
  * example : path.replace("/myservice/external", "/ext/myservice").replace("/myservice/internal", "/myservice");
  */
-public interface GSwaggerRedirectPathReplacer {
+public interface MatchnowSwaggerRedirectPathReplacer {
     String replace(String path);
 }

@@ -1,9 +1,9 @@
 package com.gswagger.utils;
 
-import com.gswagger.properties.GSwaggerGlobalHeaders;
-import com.gswagger.properties.GSwaggerGroup;
-import com.gswagger.properties.GSwaggerProperties;
-import com.gswagger.properties.GSwaggerServers;
+import com.gswagger.properties.MatchnowSwaggerGlobalHeaders;
+import com.gswagger.properties.MatchnowSwaggerGroup;
+import com.gswagger.properties.MatchnowSwaggerProperties;
+import com.gswagger.properties.MatchnowSwaggerServers;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.Paths;
@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-public class DefaultGroupGenerator implements GSwaggerGroupGenerator {
-    private final GSwaggerProperties properties;
-    private final GSwaggerRedirectPathReplacer pathReplacer;
+public class DefaultGroupGenerator implements MatchnowSwaggerGroupGenerator {
+    private final MatchnowSwaggerProperties properties;
+    private final MatchnowSwaggerRedirectPathReplacer pathReplacer;
 
     @Override
-    public GroupedOpenApi generateGroup(GSwaggerGroup group) {
+    public GroupedOpenApi generateGroup(MatchnowSwaggerGroup group) {
         return GroupedOpenApi.builder()
                 .group(group.getTitle())
                 .pathsToMatch(group.getPathPattern())
@@ -40,19 +40,19 @@ public class DefaultGroupGenerator implements GSwaggerGroupGenerator {
                 .in(SecurityScheme.In.HEADER).name(name);
     }
 
-    private void setSecuritySchemes(OpenAPI openApi, List<GSwaggerGlobalHeaders.GSwaggerHeader> headers) {
+    private void setSecuritySchemes(OpenAPI openApi, List<MatchnowSwaggerGlobalHeaders.MatchnowSwaggerHeader> headers) {
         headers.forEach(header -> openApi.getComponents()
                 .addSecuritySchemes(header.getName(), globalHeader(header.getName(), header.getExample())));
     }
 
-    private void setSecurityRequirement(OpenAPI openApi, List<GSwaggerGlobalHeaders.GSwaggerHeader> headers) {
+    private void setSecurityRequirement(OpenAPI openApi, List<MatchnowSwaggerGlobalHeaders.MatchnowSwaggerHeader> headers) {
         SecurityRequirement securityRequirement = new SecurityRequirement();
         headers.forEach(header -> securityRequirement.addList(header.getName()));
         openApi.addSecurityItem(securityRequirement);
     }
 
 
-    private List<Server> createServers(List<GSwaggerServers.GSwaggerServer> servers) {
+    private List<Server> createServers(List<MatchnowSwaggerServers.MatchnowSwaggerServer> servers) {
         return servers.stream().map(server -> new Server().description(server.getName()).url(server.getUrl())).collect(Collectors.toList());
     }
 
@@ -71,7 +71,7 @@ public class DefaultGroupGenerator implements GSwaggerGroupGenerator {
 
     @RequiredArgsConstructor
     private class CustomOpenApiCustomsier implements OpenApiCustomiser {
-        private final GSwaggerGroup group;
+        private final MatchnowSwaggerGroup group;
 
         @Override
         public void customise(OpenAPI openApi) {
@@ -87,7 +87,7 @@ public class DefaultGroupGenerator implements GSwaggerGroupGenerator {
                                     properties.getServers().getExternal()));
 
 
-            List<GSwaggerGlobalHeaders.GSwaggerHeader> headers = group.isInternal() ?
+            List<MatchnowSwaggerGlobalHeaders.MatchnowSwaggerHeader> headers = group.isInternal() ?
                     properties.getGlobalHeaders().getInternal() :
                     properties.getGlobalHeaders().getExternal();
 

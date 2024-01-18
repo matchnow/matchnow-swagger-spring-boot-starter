@@ -1,12 +1,12 @@
 package com.gswagger.config;
 
-import com.gswagger.GSwaggerConstants;
-import com.gswagger.filter.GSwaggerCorsFilter;
-import com.gswagger.properties.GSwaggerProperties;
+import com.gswagger.MatchnowSwaggerConstants;
+import com.gswagger.filter.MatchnowSwaggerCorsFilter;
+import com.gswagger.properties.MatchnowSwaggerProperties;
 import com.gswagger.utils.DefaultGroupGenerator;
 import com.gswagger.utils.DefaultRedirectPathReplacer;
-import com.gswagger.utils.GSwaggerGroupGenerator;
-import com.gswagger.utils.GSwaggerRedirectPathReplacer;
+import com.gswagger.utils.MatchnowSwaggerGroupGenerator;
+import com.gswagger.utils.MatchnowSwaggerRedirectPathReplacer;
 import org.springdoc.core.*;
 import org.springdoc.webmvc.core.MultipleOpenApiSupportConfiguration;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,12 +22,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import static com.gswagger.GSwaggerConstants.*;
+import static com.gswagger.MatchnowSwaggerConstants.*;
 
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty({GSwaggerConstants.GSWAGGER_ENABLED, Constants.SPRINGDOC_ENABLED, Constants.SPRINGDOC_SWAGGER_UI_ENABLED})
-public class GSwaggerAutoConfiguration {
+@ConditionalOnProperty({MatchnowSwaggerConstants.MATCHNOW_SWAGGER_ENABLED, Constants.SPRINGDOC_ENABLED, Constants.SPRINGDOC_SWAGGER_UI_ENABLED})
+public class MatchnowSwaggerAutoConfiguration {
 
     @Bean
     @Primary
@@ -35,34 +35,34 @@ public class GSwaggerAutoConfiguration {
             SwaggerUiConfigProperties swaggerUiConfig,
             ApplicationContext applicationContext,
             @Value(REDIRECT_PATH_REPLACER) String pathReplacerName) {
-        return new GSwaggerUiConfigParameters(swaggerUiConfig, applicationContext.getBean(pathReplacerName, GSwaggerRedirectPathReplacer.class));
+        return new MatchnowSwaggerUiConfigParameters(swaggerUiConfig, applicationContext.getBean(pathReplacerName, MatchnowSwaggerRedirectPathReplacer.class));
     }
 
     @Bean
-    public GSwaggerProperties swaggerCustomProperties(Environment environment) {
+    public MatchnowSwaggerProperties swaggerCustomProperties(Environment environment) {
         return Binder.get(environment)
-                .bind(GSWAGGER_PROPERTIES, GSwaggerProperties.class)
+                .bind(MATCHNOW_SWAGGER_PROPERTIES, MatchnowSwaggerProperties.class)
                 .get();
     }
 
     @Bean
-    public GSwaggerGroupGenerator defaultGroupGenerator(
-            GSwaggerProperties properties,
+    public MatchnowSwaggerGroupGenerator defaultGroupGenerator(
+            MatchnowSwaggerProperties properties,
             ApplicationContext applicationContext,
             @Value(REDIRECT_PATH_REPLACER) String pathReplacerName
     ) {
-        return new DefaultGroupGenerator(properties, applicationContext.getBean(pathReplacerName, GSwaggerRedirectPathReplacer.class));
+        return new DefaultGroupGenerator(properties, applicationContext.getBean(pathReplacerName, MatchnowSwaggerRedirectPathReplacer.class));
     }
 
     @Bean
-    public GSwaggerGroupRegisterer swaggerCustomInitializer(
-            GSwaggerProperties swaggerCustomProperties,
-            GSwaggerGroupGenerator groupGenerator) {
-        return new GSwaggerGroupRegisterer(swaggerCustomProperties, groupGenerator);
+    public MatchnowSwaggerGroupBeanRegisterer swaggerCustomInitializer(
+            MatchnowSwaggerProperties swaggerCustomProperties,
+            MatchnowSwaggerGroupGenerator groupGenerator) {
+        return new MatchnowSwaggerGroupBeanRegisterer(swaggerCustomProperties, groupGenerator);
     }
 
     @Bean
-    public GSwaggerRedirectPathReplacer defaultRedirectPathReplacer(GSwaggerProperties properties) {
+    public MatchnowSwaggerRedirectPathReplacer defaultRedirectPathReplacer(MatchnowSwaggerProperties properties) {
         return new DefaultRedirectPathReplacer(properties);
     }
 
@@ -74,9 +74,9 @@ public class GSwaggerAutoConfiguration {
      * @see MultipleOpenApiSupportConfiguration
      */
     @Bean
-    public GroupedOpenApi groupedOpenApi(GSwaggerProperties properties, GSwaggerGroupGenerator groupGenerator) {
+    public GroupedOpenApi groupedOpenApi(MatchnowSwaggerProperties properties, MatchnowSwaggerGroupGenerator groupGenerator) {
         if (CollectionUtils.isEmpty(properties.getGroups())) {
-            throw new IllegalStateException("gswagger's groups must be present");
+            throw new IllegalStateException("matchnow-swagger's groups must be present");
         }
         return groupGenerator.generateGroup(properties.getGroups().get(0));
     }
@@ -86,8 +86,8 @@ public class GSwaggerAutoConfiguration {
      */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    @ConditionalOnProperty(GSWAGGER_CORS_ENABLED)
+    @ConditionalOnProperty(MATCHNOW_SWAGGER_CORS_ENABLED)
     public OncePerRequestFilter gSwaggerCorsFilter() {
-        return new GSwaggerCorsFilter();
+        return new MatchnowSwaggerCorsFilter();
     }
 }

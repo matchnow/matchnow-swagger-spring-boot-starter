@@ -10,14 +10,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GSwaggerGlobalHeaders {
-    private List<GSwaggerHeader> external;
-    private List<GSwaggerHeader> internal;
+public class MatchnowSwaggerGlobalHeaders {
+    private List<MatchnowSwaggerHeader> external;
+    private List<MatchnowSwaggerHeader> internal;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class GSwaggerHeader {
+    public static class MatchnowSwaggerHeader {
         private String name;
         private String example;
     }

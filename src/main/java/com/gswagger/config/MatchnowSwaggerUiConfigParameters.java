@@ -1,6 +1,6 @@
 package com.gswagger.config;
 
-import com.gswagger.utils.GSwaggerRedirectPathReplacer;
+import com.gswagger.utils.MatchnowSwaggerRedirectPathReplacer;
 import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springdoc.core.SwaggerUiConfigProperties;
@@ -9,16 +9,16 @@ import org.springframework.util.CollectionUtils;
 import java.util.Map;
 import java.util.Set;
 
-public class GSwaggerUiConfigParameters extends SwaggerUiConfigParameters {
-    private final GSwaggerRedirectPathReplacer pathReplacer;
+public class MatchnowSwaggerUiConfigParameters extends SwaggerUiConfigParameters {
+    private final MatchnowSwaggerRedirectPathReplacer pathReplacer;
 
     /**
      * Instantiates a new Swagger ui config parameters.
      *
      * @param swaggerUiConfig the swagger ui config
      */
-    public GSwaggerUiConfigParameters(SwaggerUiConfigProperties swaggerUiConfig,
-                                      GSwaggerRedirectPathReplacer pathReplacer) {
+    public MatchnowSwaggerUiConfigParameters(SwaggerUiConfigProperties swaggerUiConfig,
+                                             MatchnowSwaggerRedirectPathReplacer pathReplacer) {
         super(swaggerUiConfig);
         this.pathReplacer = pathReplacer;
     }

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.gswagger.config.GSwaggerAutoConfiguration
+com.gswagger.config.MatchnowSwaggerAutoConfiguration
