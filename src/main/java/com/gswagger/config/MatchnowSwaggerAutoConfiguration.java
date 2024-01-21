@@ -24,6 +24,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import static com.gswagger.MatchnowSwaggerConstants.*;
+import static org.springdoc.core.Constants.API_DOCS_URL;
+import static org.springdoc.core.Constants.SWAGGER_UI_PATH;
 
 
 @Configuration(proxyBeanMethods = false)
@@ -90,10 +92,5 @@ public class MatchnowSwaggerAutoConfiguration {
     @ConditionalOnProperty(MATCHNOW_SWAGGER_CORS_ENABLED)
     public OncePerRequestFilter gSwaggerCorsFilter() {
         return new MatchnowSwaggerCorsFilter();
-    }
-
-    @Bean
-    public MatchnowSwaggerPropertyController matchnowSwaggerPropertyController(MatchnowSwaggerProperties matchnowSwaggerProperties) {
-        return new MatchnowSwaggerPropertyController(matchnowSwaggerProperties);
     }
 }
