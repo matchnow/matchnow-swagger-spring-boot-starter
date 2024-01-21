@@ -14,9 +14,11 @@ import io.swagger.v3.oas.models.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -87,12 +89,21 @@ public class DefaultGroupGenerator implements MatchnowSwaggerGroupGenerator {
                                     properties.getServers().getExternal()));
 
 
-            List<MatchnowSwaggerGlobalHeaders.MatchnowSwaggerHeader> headers = group.isInternal() ?
-                    properties.getGlobalHeaders().getInternal() :
-                    properties.getGlobalHeaders().getExternal();
+            setGlobalHeaders(openApi);
+        }
 
-            setSecuritySchemes(openApi, headers);
-            setSecurityRequirement(openApi, headers);
+        private void setGlobalHeaders(OpenAPI openApi) {
+            if (Objects.nonNull(properties.getGlobalHeaders())) {
+                List<MatchnowSwaggerGlobalHeaders.MatchnowSwaggerHeader> headers =
+                        group.isInternal() ?
+                                properties.getGlobalHeaders().getInternal() :
+                                properties.getGlobalHeaders().getExternal();
+
+                if (!CollectionUtils.isEmpty(headers)) {
+                    setSecuritySchemes(openApi, headers);
+                    setSecurityRequirement(openApi, headers);
+                }
+            }
         }
     }
 }
