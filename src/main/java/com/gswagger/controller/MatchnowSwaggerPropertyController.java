@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,27 +20,22 @@ import static org.springdoc.core.Constants.SWAGGER_UI_PATH;
 @ConditionalOnBean(MatchnowSwaggerProperties.class)
 @RequiredArgsConstructor
 public class MatchnowSwaggerPropertyController {
-    private final MatchnowSwaggerProperties matchnowSwaggerProperties;
-
     @Value(SWAGGER_UI_PATH)
     private String swaggerUiPath;
     @Value(API_DOCS_URL)
     private String apiDocPath;
 
-    @GetMapping(MatchnowSwaggerConstants.MATHCNOW_SWAGGER_PROPERTY_URL)
-    public ResponseEntity<MatchnowSwaggerServiceProperties> getProperties() {
-        return ResponseEntity.ok(MatchnowSwaggerServiceProperties.builder()
-                .swaggerUiPath(swaggerUiPath)
-                .apiDocPath(apiDocPath)
-                .matchnowSwaggerProperties(matchnowSwaggerProperties)
-                .build());
+    @GetMapping(value = MatchnowSwaggerConstants.MATHCNOW_SWAGGER_PROPERTY_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+    public MatchnowSwaggerServiceProperties getProperties() {
+        MatchnowSwaggerServiceProperties properties = new MatchnowSwaggerServiceProperties();
+        properties.swaggerUiPath = swaggerUiPath;
+        properties.apiDocPath = apiDocPath;
+        return properties;
     }
 
     @Getter
-    @Builder
     public static class MatchnowSwaggerServiceProperties {
         private String swaggerUiPath;
         private String apiDocPath;
-        private MatchnowSwaggerProperties matchnowSwaggerProperties;
     }
 }
