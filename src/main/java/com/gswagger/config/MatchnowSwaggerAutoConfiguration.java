@@ -1,6 +1,7 @@
 package com.gswagger.config;
 
 import com.gswagger.MatchnowSwaggerConstants;
+import com.gswagger.controller.MatchnowSwaggerPropertyController;
 import com.gswagger.filter.MatchnowSwaggerCorsFilter;
 import com.gswagger.properties.MatchnowSwaggerProperties;
 import com.gswagger.utils.DefaultGroupGenerator;
@@ -89,5 +90,10 @@ public class MatchnowSwaggerAutoConfiguration {
     @ConditionalOnProperty(MATCHNOW_SWAGGER_CORS_ENABLED)
     public OncePerRequestFilter gSwaggerCorsFilter() {
         return new MatchnowSwaggerCorsFilter();
+    }
+
+    @Bean
+    public MatchnowSwaggerPropertyController matchnowSwaggerPropertyController(MatchnowSwaggerProperties matchnowSwaggerProperties) {
+        return new MatchnowSwaggerPropertyController(matchnowSwaggerProperties);
     }
 }
