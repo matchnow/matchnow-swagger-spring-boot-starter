@@ -17,13 +17,10 @@ import static org.springdoc.core.Constants.API_DOCS_URL;
 import static org.springdoc.core.Constants.SWAGGER_UI_PATH;
 
 @RestController
-@ConditionalOnBean(MatchnowSwaggerProperties.class)
 @RequiredArgsConstructor
 public class MatchnowSwaggerPropertyController {
-    @Value(SWAGGER_UI_PATH)
-    private String swaggerUiPath;
-    @Value(API_DOCS_URL)
-    private String apiDocPath;
+    private final String swaggerUiPath;
+    private final String apiDocPath;
 
     @GetMapping(value = MatchnowSwaggerConstants.MATHCNOW_SWAGGER_PROPERTY_URL, produces = MediaType.APPLICATION_JSON_VALUE)
     public MatchnowSwaggerServiceProperties getProperties() {

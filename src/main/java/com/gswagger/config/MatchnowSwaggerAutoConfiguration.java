@@ -93,4 +93,9 @@ public class MatchnowSwaggerAutoConfiguration {
     public OncePerRequestFilter gSwaggerCorsFilter() {
         return new MatchnowSwaggerCorsFilter();
     }
+
+    @Bean
+    public MatchnowSwaggerPropertyController matchnowSwaggerPropertyController(@Value(SWAGGER_UI_PATH) String swaggerUiPath, @Value(API_DOCS_URL) String apiDocPath) {
+        return new MatchnowSwaggerPropertyController(swaggerUiPath, apiDocPath);
+    }
 }
