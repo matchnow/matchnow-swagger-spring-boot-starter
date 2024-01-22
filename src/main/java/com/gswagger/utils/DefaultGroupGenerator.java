@@ -12,6 +12,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.util.CollectionUtils;
@@ -28,11 +29,15 @@ public class DefaultGroupGenerator implements MatchnowSwaggerGroupGenerator {
 
     @Override
     public GroupedOpenApi generateGroup(MatchnowSwaggerGroup group) {
-        return GroupedOpenApi.builder()
+        GroupedOpenApi.Builder builder = GroupedOpenApi.builder()
                 .group(group.getTitle())
                 .pathsToMatch(group.getPathPattern())
-                .addOpenApiCustomiser(new CustomOpenApiCustomsier(group))
-                .build();
+                .addOpenApiCustomiser(new CustomOpenApiCustomsier(group));
+
+        if (!CollectionUtils.isEmpty(group.getExcludePathPatterns())) {
+            builder.pathsToExclude(group.getExcludePathPatterns().toArray(new String[]{}));
+        }
+        return builder.build();
     }
 
     private SecurityScheme globalHeader(String name, String example) {

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,6 +17,7 @@ public class MatchnowSwaggerGroup {
     private String description;
     private MatchnowSwaggerPathType pathType;
     private String pathPattern;
+    private List<String> excludePathPatterns;
     private String version;
 
     public boolean isInternal() {
