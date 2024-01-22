@@ -20,7 +20,7 @@ public class MatchnowSwaggerCorsFilter extends OncePerRequestFilter {
 
     private void setCorsResponseHeaders(HttpServletResponse response) {
         response.setHeader(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-        response.setHeader(ACCESS_CONTROL_ALLOW_METHODS, "POST, GET, OPTIONS, PUT, DELETE");
+        response.setHeader(ACCESS_CONTROL_ALLOW_METHODS, "POST, GET, OPTIONS, PUT, PATCH, DELETE");
         response.setHeader(ACCESS_CONTROL_MAX_AGE, "3600");
         response.setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
         response.setHeader(ACCESS_CONTROL_ALLOW_HEADERS, "*");
