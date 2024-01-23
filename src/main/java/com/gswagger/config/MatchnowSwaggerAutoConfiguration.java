@@ -95,7 +95,7 @@ public class MatchnowSwaggerAutoConfiguration {
     }
 
     @Bean
-    public MatchnowSwaggerPropertyController matchnowSwaggerPropertyController(@Value(SWAGGER_UI_PATH) String swaggerUiPath, @Value(API_DOCS_URL) String apiDocPath) {
-        return new MatchnowSwaggerPropertyController(swaggerUiPath, apiDocPath);
+    public MatchnowSwaggerPropertyController matchnowSwaggerPropertyController(@Value(SWAGGER_UI_PATH) String swaggerUiPath, @Value(API_DOCS_URL) String apiDocPath, MatchnowSwaggerRedirectPathReplacer pathReplacer) {
+        return new MatchnowSwaggerPropertyController(pathReplacer.replace(swaggerUiPath), pathReplacer.replace(apiDocPath));
     }
 }
