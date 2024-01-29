@@ -29,9 +29,13 @@ public class DefaultGroupGenerator implements MatchnowSwaggerGroupGenerator {
 
     @Override
     public GroupedOpenApi generateGroup(MatchnowSwaggerGroup group) {
+        String[] pathsToMatch = StringUtils.isNotBlank(group.getPathPattern()) ?
+                new String[]{group.getPathPattern()} :
+                group.getIncludePathPatterns().toArray(new String[0]);
+
         GroupedOpenApi.Builder builder = GroupedOpenApi.builder()
                 .group(group.getTitle())
-                .pathsToMatch(group.getPathPattern())
+                .pathsToMatch(pathsToMatch)
                 .addOpenApiCustomiser(new CustomOpenApiCustomsier(group));
 
         if (!CollectionUtils.isEmpty(group.getExcludePathPatterns())) {

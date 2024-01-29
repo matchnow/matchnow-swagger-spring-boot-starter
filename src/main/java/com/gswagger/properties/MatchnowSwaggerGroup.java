@@ -17,6 +17,7 @@ public class MatchnowSwaggerGroup {
     private String description;
     private MatchnowSwaggerPathType pathType;
     private String pathPattern;
+    private List<String> includePathPatterns;
     private List<String> excludePathPatterns;
     private String version;
 
