@@ -1,4 +1,4 @@
-# Version 0.0.3
+# Version 0.0.4
 
 - include-path-patterns 설정 추가
     - path-pattern 없으면 해당 설정 사용, 잇으면 사용 안함
