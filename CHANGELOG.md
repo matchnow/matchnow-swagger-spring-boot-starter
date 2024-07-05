@@ -1,3 +1,7 @@
+# Version 0.0.5
+
+- 배포용 버전업
+
 # Version 0.0.4
 
 - include-path-patterns 설정 추가
