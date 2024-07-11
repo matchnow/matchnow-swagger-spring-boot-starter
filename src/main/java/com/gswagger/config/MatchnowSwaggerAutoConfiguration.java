@@ -25,6 +25,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.util.Map;
+
 import static com.gswagger.MatchnowSwaggerConstants.*;
 import static org.springdoc.core.Constants.API_DOCS_URL;
 import static org.springdoc.core.Constants.SWAGGER_UI_PATH;
@@ -103,7 +105,11 @@ public class MatchnowSwaggerAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(value = USE_CUSTOM_OBJECT_MAPPER, matchIfMissing = true)
-    public ModelResolver modelResolver(@Value(MODEL_RESOLVER_OBJECT_MAPPER) ObjectMapper objectMapper) {
-        return new ModelResolver(objectMapper);
+    public ModelResolver modelResolver(@Value(MODEL_RESOLVER_OBJECT_MAPPER) String beanName, Map<String, ObjectMapper> mapperMap) {
+        if (mapperMap.containsKey(beanName)) {
+            return new ModelResolver(mapperMap.get(beanName));
+        } else {
+            throw new IllegalArgumentException("ObjectMapper not found. name: " + beanName +". Please specify correct bean name in ${springdoc.matchnow-swagger.object-mapper}.}");
+        }
     }
 }
