@@ -1,5 +1,6 @@
 package com.gswagger.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gswagger.MatchnowSwaggerConstants;
 import com.gswagger.controller.MatchnowSwaggerPropertyController;
 import com.gswagger.filter.MatchnowSwaggerCorsFilter;
@@ -8,9 +9,12 @@ import com.gswagger.utils.DefaultGroupGenerator;
 import com.gswagger.utils.DefaultRedirectPathReplacer;
 import com.gswagger.utils.MatchnowSwaggerGroupGenerator;
 import com.gswagger.utils.MatchnowSwaggerRedirectPathReplacer;
+import io.swagger.v3.core.jackson.ModelResolver;
 import org.springdoc.core.*;
 import org.springdoc.webmvc.core.MultipleOpenApiSupportConfiguration;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.ApplicationContext;
@@ -97,5 +101,11 @@ public class MatchnowSwaggerAutoConfiguration {
     @Bean
     public MatchnowSwaggerPropertyController matchnowSwaggerPropertyController(@Value(SWAGGER_UI_PATH) String swaggerUiPath, @Value(API_DOCS_URL) String apiDocPath, MatchnowSwaggerRedirectPathReplacer pathReplacer) {
         return new MatchnowSwaggerPropertyController(pathReplacer.replace(swaggerUiPath), pathReplacer.replace(apiDocPath));
+    }
+
+    @Bean
+    @ConditionalOnBean(ObjectMapper.class)
+    public ModelResolver modelResolver(@Value(MODEL_RESOVER_OBJECT_MAPPER) ObjectMapper objectMapper) {
+        return new ModelResolver(objectMapper);
     }
 }
