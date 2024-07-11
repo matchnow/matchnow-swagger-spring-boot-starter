@@ -1,3 +1,7 @@
+# Version 0.0.6
+
+- 커스텀 ObjectMapper 설정 기능 추가
+
 # Version 0.0.5
 
 - 배포용 버전업
