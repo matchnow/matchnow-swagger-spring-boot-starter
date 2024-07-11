@@ -13,8 +13,6 @@ import io.swagger.v3.core.jackson.ModelResolver;
 import org.springdoc.core.*;
 import org.springdoc.webmvc.core.MultipleOpenApiSupportConfiguration;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.ApplicationContext;
@@ -104,8 +102,8 @@ public class MatchnowSwaggerAutoConfiguration {
     }
 
     @Bean
-    @Order
-    public ModelResolver modelResolver(@Value(MODEL_RESOVER_OBJECT_MAPPER) ObjectMapper objectMapper) {
+    @ConditionalOnProperty(value = USE_CUSTOM_OBJECT_MAPPER, matchIfMissing = true)
+    public ModelResolver modelResolver(@Value(MODEL_RESOLVER_OBJECT_MAPPER) ObjectMapper objectMapper) {
         return new ModelResolver(objectMapper);
     }
 }
