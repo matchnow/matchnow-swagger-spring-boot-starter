@@ -104,7 +104,7 @@ public class MatchnowSwaggerAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnBean(ObjectMapper.class)
+    @Order
     public ModelResolver modelResolver(@Value(MODEL_RESOVER_OBJECT_MAPPER) ObjectMapper objectMapper) {
         return new ModelResolver(objectMapper);
     }
