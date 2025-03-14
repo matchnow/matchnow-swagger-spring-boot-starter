@@ -1,3 +1,7 @@
+# Version 0.0.7
+
+- Jitpack refresh 용 버전업
+
 # Version 0.0.6
 
 - [ADD] 커스텀 ObjectMapper 설정 기능 추가
