@@ -1,9 +1,9 @@
-package com.gswagger.utils;
+package com.matchnowswagger.utils;
 
-import com.gswagger.properties.MatchnowSwaggerGlobalHeaders;
-import com.gswagger.properties.MatchnowSwaggerGroup;
-import com.gswagger.properties.MatchnowSwaggerProperties;
-import com.gswagger.properties.MatchnowSwaggerServers;
+import com.matchnowswagger.properties.MatchnowSwaggerGlobalHeaders;
+import com.matchnowswagger.properties.MatchnowSwaggerGroup;
+import com.matchnowswagger.properties.MatchnowSwaggerProperties;
+import com.matchnowswagger.properties.MatchnowSwaggerServers;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.Paths;
@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
+import org.springframework.context.MessageSource;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 public class DefaultGroupGenerator implements MatchnowSwaggerGroupGenerator {
     private final MatchnowSwaggerProperties properties;
     private final MatchnowSwaggerRedirectPathReplacer pathReplacer;
+    private final MessageSource messageSource;
 
     @Override
     public GroupedOpenApi generateGroup(MatchnowSwaggerGroup group) {
@@ -97,6 +99,7 @@ public class DefaultGroupGenerator implements MatchnowSwaggerGroupGenerator {
                                     properties.getServers().getInternal() :
                                     properties.getServers().getExternal()));
 
+            I18nUtils.applyI18n(openApi, messageSource);
 
             setGlobalHeaders(openApi);
         }

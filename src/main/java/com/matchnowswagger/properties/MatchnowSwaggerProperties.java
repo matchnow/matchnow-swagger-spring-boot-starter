@@ -1,4 +1,4 @@
-package com.gswagger.properties;
+package com.matchnowswagger.properties;
 
 import lombok.Getter;
 import lombok.Setter;

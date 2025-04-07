@@ -1,8 +1,8 @@
-package com.gswagger.config;
+package com.matchnowswagger.config;
 
-import com.gswagger.properties.MatchnowSwaggerGroup;
-import com.gswagger.properties.MatchnowSwaggerProperties;
-import com.gswagger.utils.MatchnowSwaggerGroupGenerator;
+import com.matchnowswagger.properties.MatchnowSwaggerGroup;
+import com.matchnowswagger.properties.MatchnowSwaggerProperties;
+import com.matchnowswagger.utils.MatchnowSwaggerGroupGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.beans.BeansException;

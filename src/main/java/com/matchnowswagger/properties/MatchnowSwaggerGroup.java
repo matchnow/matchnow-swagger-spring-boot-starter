@@ -1,7 +1,7 @@
-package com.gswagger.properties;
+package com.matchnowswagger.properties;
 
 
-import com.gswagger.MatchnowSwaggerPathType;
+import com.matchnowswagger.MatchnowSwaggerPathType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

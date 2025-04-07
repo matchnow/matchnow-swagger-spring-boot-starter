@@ -1,6 +1,6 @@
-package com.gswagger.config;
+package com.matchnowswagger.config;
 
-import com.gswagger.utils.MatchnowSwaggerRedirectPathReplacer;
+import com.matchnowswagger.utils.MatchnowSwaggerRedirectPathReplacer;
 import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springdoc.core.SwaggerUiConfigProperties;

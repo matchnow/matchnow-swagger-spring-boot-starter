@@ -1,6 +1,6 @@
-package com.gswagger.utils;
+package com.matchnowswagger.utils;
 
-import com.gswagger.properties.MatchnowSwaggerGroup;
+import com.matchnowswagger.properties.MatchnowSwaggerGroup;
 import org.springdoc.core.GroupedOpenApi;
 
 public interface MatchnowSwaggerGroupGenerator {

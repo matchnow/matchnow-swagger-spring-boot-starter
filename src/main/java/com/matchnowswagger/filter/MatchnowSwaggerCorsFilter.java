@@ -1,4 +1,4 @@
-package com.gswagger.filter;
+package com.matchnowswagger.filter;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 

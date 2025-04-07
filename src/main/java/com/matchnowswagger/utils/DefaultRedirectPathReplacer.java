@@ -1,7 +1,7 @@
-package com.gswagger.utils;
+package com.matchnowswagger.utils;
 
-import com.gswagger.properties.MatchnowSwaggerProperties;
-import com.gswagger.properties.MatchnowSwaggerRedirectProperties;
+import com.matchnowswagger.properties.MatchnowSwaggerProperties;
+import com.matchnowswagger.properties.MatchnowSwaggerRedirectProperties;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;

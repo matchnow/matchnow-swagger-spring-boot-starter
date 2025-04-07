@@ -1,4 +1,4 @@
-package com.gswagger;
+package com.matchnowswagger;
 
 public class MatchnowSwaggerConstants {
     public static final String MATCHNOW_SWAGGER_ENABLED = "springdoc.matchnow-swagger.enabled";

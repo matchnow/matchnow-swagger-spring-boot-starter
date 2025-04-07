@@ -1,6 +1,6 @@
-package com.gswagger.controller;
+package com.matchnowswagger.controller;
 
-import com.gswagger.MatchnowSwaggerConstants;
+import com.matchnowswagger.MatchnowSwaggerConstants;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

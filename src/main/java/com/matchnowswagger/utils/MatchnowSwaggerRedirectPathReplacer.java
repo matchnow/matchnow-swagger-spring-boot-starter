@@ -1,4 +1,4 @@
-package com.gswagger.utils;
+package com.matchnowswagger.utils;
 
 /**
  * 해당 인터페이스의 기능

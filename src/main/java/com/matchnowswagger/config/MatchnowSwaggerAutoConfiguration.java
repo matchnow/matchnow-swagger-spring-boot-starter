@@ -1,14 +1,14 @@
-package com.gswagger.config;
+package com.matchnowswagger.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gswagger.MatchnowSwaggerConstants;
-import com.gswagger.controller.MatchnowSwaggerPropertyController;
-import com.gswagger.filter.MatchnowSwaggerCorsFilter;
-import com.gswagger.properties.MatchnowSwaggerProperties;
-import com.gswagger.utils.DefaultGroupGenerator;
-import com.gswagger.utils.DefaultRedirectPathReplacer;
-import com.gswagger.utils.MatchnowSwaggerGroupGenerator;
-import com.gswagger.utils.MatchnowSwaggerRedirectPathReplacer;
+import com.matchnowswagger.MatchnowSwaggerConstants;
+import com.matchnowswagger.controller.MatchnowSwaggerPropertyController;
+import com.matchnowswagger.filter.MatchnowSwaggerCorsFilter;
+import com.matchnowswagger.properties.MatchnowSwaggerProperties;
+import com.matchnowswagger.utils.DefaultGroupGenerator;
+import com.matchnowswagger.utils.DefaultRedirectPathReplacer;
+import com.matchnowswagger.utils.MatchnowSwaggerGroupGenerator;
+import com.matchnowswagger.utils.MatchnowSwaggerRedirectPathReplacer;
 import io.swagger.v3.core.jackson.ModelResolver;
 import org.springdoc.core.*;
 import org.springdoc.webmvc.core.MultipleOpenApiSupportConfiguration;
@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -27,7 +28,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.Map;
 
-import static com.gswagger.MatchnowSwaggerConstants.*;
+import static com.matchnowswagger.MatchnowSwaggerConstants.*;
 import static org.springdoc.core.Constants.API_DOCS_URL;
 import static org.springdoc.core.Constants.SWAGGER_UI_PATH;
 
@@ -56,9 +57,10 @@ public class MatchnowSwaggerAutoConfiguration {
     public MatchnowSwaggerGroupGenerator defaultGroupGenerator(
             MatchnowSwaggerProperties properties,
             ApplicationContext applicationContext,
-            @Value(REDIRECT_PATH_REPLACER) String pathReplacerName
+            @Value(REDIRECT_PATH_REPLACER) String pathReplacerName,
+            MessageSource matchnowSwaggerMessageSource
     ) {
-        return new DefaultGroupGenerator(properties, applicationContext.getBean(pathReplacerName, MatchnowSwaggerRedirectPathReplacer.class));
+        return new DefaultGroupGenerator(properties, applicationContext.getBean(pathReplacerName, MatchnowSwaggerRedirectPathReplacer.class), matchnowSwaggerMessageSource);
     }
 
     @Bean
@@ -112,4 +114,5 @@ public class MatchnowSwaggerAutoConfiguration {
             throw new IllegalArgumentException("ObjectMapper not found. name: " + beanName +". Please specify correct bean name in ${springdoc.matchnow-swagger.object-mapper}.}");
         }
     }
+
 }

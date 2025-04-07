@@ -1,4 +1,4 @@
-package com.gswagger.properties;
+package com.matchnowswagger.properties;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,15 +10,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MatchnowSwaggerRedirectProperties {
-    private List<MatchnowSwaggerRedirectRule> external;
-    private List<MatchnowSwaggerRedirectRule> internal;
+public class MatchnowSwaggerServers {
+    private List<MatchnowSwaggerServer> external;
+    private List<MatchnowSwaggerServer> internal;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class MatchnowSwaggerRedirectRule {
-        private String from;
-        private String to;
+    public static class MatchnowSwaggerServer {
+        private String name;
+        private String url;
     }
 }
