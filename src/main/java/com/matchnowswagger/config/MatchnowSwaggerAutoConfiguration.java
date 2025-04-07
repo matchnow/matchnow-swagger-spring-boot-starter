@@ -58,9 +58,9 @@ public class MatchnowSwaggerAutoConfiguration {
             MatchnowSwaggerProperties properties,
             ApplicationContext applicationContext,
             @Value(REDIRECT_PATH_REPLACER) String pathReplacerName,
-            MessageSource matchnowSwaggerMessageSource
+            MessageSource messageSource
     ) {
-        return new DefaultGroupGenerator(properties, applicationContext.getBean(pathReplacerName, MatchnowSwaggerRedirectPathReplacer.class), matchnowSwaggerMessageSource);
+        return new DefaultGroupGenerator(properties, applicationContext.getBean(pathReplacerName, MatchnowSwaggerRedirectPathReplacer.class), messageSource);
     }
 
     @Bean
@@ -114,5 +114,4 @@ public class MatchnowSwaggerAutoConfiguration {
             throw new IllegalArgumentException("ObjectMapper not found. name: " + beanName +". Please specify correct bean name in ${springdoc.matchnow-swagger.object-mapper}.}");
         }
     }
-
 }
