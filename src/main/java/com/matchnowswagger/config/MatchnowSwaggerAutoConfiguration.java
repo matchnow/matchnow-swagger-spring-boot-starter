@@ -5,11 +5,12 @@ import com.matchnowswagger.MatchnowSwaggerConstants;
 import com.matchnowswagger.controller.MatchnowSwaggerPropertyController;
 import com.matchnowswagger.filter.MatchnowSwaggerCorsFilter;
 import com.matchnowswagger.properties.MatchnowSwaggerProperties;
-import com.matchnowswagger.utils.DefaultGroupGenerator;
-import com.matchnowswagger.utils.DefaultRedirectPathReplacer;
-import com.matchnowswagger.utils.MatchnowSwaggerGroupGenerator;
-import com.matchnowswagger.utils.MatchnowSwaggerRedirectPathReplacer;
+import com.matchnowswagger.utils.*;
+import io.swagger.v3.core.converter.AnnotatedType;
+import io.swagger.v3.core.converter.ModelConverter;
+import io.swagger.v3.core.converter.ModelConverterContext;
 import io.swagger.v3.core.jackson.ModelResolver;
+import io.swagger.v3.oas.models.media.Schema;
 import org.springdoc.core.*;
 import org.springdoc.webmvc.core.MultipleOpenApiSupportConfiguration;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +27,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import static com.matchnowswagger.MatchnowSwaggerConstants.*;
@@ -113,5 +115,15 @@ public class MatchnowSwaggerAutoConfiguration {
         } else {
             throw new IllegalArgumentException("ObjectMapper not found. name: " + beanName +". Please specify correct bean name in ${springdoc.matchnow-swagger.object-mapper}.}");
         }
+    }
+
+    @Bean
+    public ModelConverter i18nModelConverter(MessageSource messageSource) {
+        return new ModelConverter() {
+            @Override
+            public Schema<?> resolve(AnnotatedType type, ModelConverterContext context, Iterator<ModelConverter> chain) {
+                return I18nUtils.resolve(type, context, chain, messageSource);
+            }
+        };
     }
 }
